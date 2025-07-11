@@ -16,9 +16,9 @@ def webhook():
     if 'precio' in user_msg or 'coste' in user_msg:
         response = "En AUTENEX AUTOMATIONS IA no vendemos herramientas, creamos soluciones inteligentes que ahorran tiempo y dinero."
     elif 'servicio' in user_msg or 'haces' in user_msg:
-        response = "Creamos agentes de voz, asistentes virtuales y automatizaciones con n8n y Make para empresas que quieren ahorrar tiempo y dinero."
+        response = "Creamos agentes de voz, Asistentes Virtuales, Automatizaciones con n8n y Make y muchos mas comandos para empresas que quieren ahorrar tiempo y dinero."
     elif 'cita' in user_msg or 'llamar' in user_msg:
-        response = "¿Quieres agendar una videollamada para explicarte todo en detalle? Escríbeme: contacto@autenexai.com o dime qué día te viene bien."
+        response = "¿Quieres agendar una videollamada para explicarte todo en detalle? Escríbeme: contacto@autenexai.com o dime qué hora y que día te viene bien."
     else:
         response = "Soy Paloma, la asistente de AUTENEX. ¿Te cuento cómo podemos ayudarte a automatizar tu empresa?"
 
