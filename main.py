@@ -5,7 +5,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 # Obtén el token del entorno
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 print("🔐 Token cargado:", BOT_TOKEN)
 
