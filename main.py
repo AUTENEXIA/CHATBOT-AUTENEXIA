@@ -46,10 +46,18 @@ def webhook():
     elif 'asesoramiento' in user_msg:
         response = ("Ofrecemos asesoramiento personalizado en automatización y transformación digital. "
                     "Estamos aquí para ayudarte a crecer y ser más eficiente.")
+    elif any(frase in user_msg for frase in [
+    'nada más', 'eso es todo', 'ya está', 'no necesito más',
+    'todo claro', 'no, gracias', 'todo perfecto ya', 'todo entendido',
+    'adiós', 'hasta luego', 'me voy', 'nos vemos'
+]):
+    response = "Perfecto. Ha sido un placer ayudarte. 👋"
+
     else:
-    response = ("Soy Paloma, la asistente virtual de AUTENEX AUTOMATIONS IA. "
-                "Ayudo a empresas como la tuya a automatizar tareas repetitivas con inteligencia artificial. "
-                "¿Te interesa saber más sobre nuestros Asistentes de Voz, Automatizaciones, CRM, Chatbots o Asesoramiento?")
+   response = ("🤖 Hola, soy Paloma, la asistente virtual de AUTENEX AUTOMATIONS IA. "
+            "Ayudo a empresas como la tuya a automatizar tareas repetitivas con inteligencia artificial. "
+            "¿Te interesa saber más sobre nuestros Asistentes de Voz, Automatizaciones, CRM, Chatbots o Asesoramiento?")
+
 
 
     # Envía la respuesta al usuario
