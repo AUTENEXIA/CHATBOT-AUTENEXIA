@@ -7,6 +7,7 @@ app = Flask(__name__)
 # Obtén el token del entorno
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
+print("🔐 Token cargado:", BOT_TOKEN)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -16,10 +17,13 @@ def webhook():
     chat_id = data.get('message', {}).get('chat', {}).get('id')
     user_msg = data.get('message', {}).get('text', "").lower()
 
+    print("📞 chat_id recibido:", chat_id)
+    print("📨 Mensaje del usuario:", user_msg)
+
     # Múltiples condiciones según palabras clave
     if 'precio' in user_msg or 'coste' in user_msg or 'presupuesto' in user_msg:
         response = (
-            "Para darte un presupuesto ajustado necesitamos entender y estudiar bien tu caso. "
+            "Para darte un presupuesto ajustado necesitamos entender y estudiar bien tu caso.\n"
             "¿Te parece si agendamos una videollamada o una llamada para ver exactamente lo que necesitas?"
         )
 
@@ -31,21 +35,23 @@ def webhook():
 
     elif 'cita' in user_msg or 'llamar' in user_msg or 'reunión' in user_msg or 'agenda' in user_msg:
         response = (
-            "¿Quieres agendar una videollamada para que te expliquemos en detalle? "
+            "¿Quieres agendar una videollamada para que te expliquemos en detalle?\n"
             "Escríbeme a autenexia@gmail.com o dime qué día y hora te viene bien."
         )
 
     elif 'automatizar' in user_msg or 'automatizaciones' in user_msg or 'automations' in user_msg:
         response = (
-            "Podemos automatizar procesos en múltiples áreas: reservas, atención al "
-            "cliente, integración de sistemas y más, utilizando n8n, Make y tecnologías "
-            "personalizadas."
+            "Podemos automatizar procesos en múltiples áreas:\n"
+            "– Reservas\n"
+            "– Atención al cliente\n"
+            "– Integración de sistemas\n"
+            "– Y más, utilizando n8n, Make y tecnologías personalizadas."
         )
 
     elif 'n8n' in user_msg:
         response = (
-            "n8n es una plataforma potente para la creación de flujos automatizados y se "
-            "ajusta perfectamente a tus necesidades de ahorro y optimización."
+            "n8n es una plataforma potente para crear flujos automatizados y se adapta "
+            "perfectamente a tus necesidades de ahorro y optimización."
         )
 
     elif 'make' in user_msg:
@@ -68,7 +74,7 @@ def webhook():
 
     elif 'asesoramiento' in user_msg:
         response = (
-            "Ofrecemos asesoramiento personalizado en automatización y transformación digital. "
+            "Ofrecemos asesoramiento personalizado en automatización y transformación digital.\n"
             "Estamos aquí para ayudarte a crecer y ser más eficiente."
         )
 
@@ -81,8 +87,8 @@ def webhook():
 
     else:
         response = (
-            "🤖 Hola, soy Paloma, la asistente virtual de AUTENEX AUTOMATIONS IA. "
-            "Ayudo a empresas como la tuya a automatizar tareas repetitivas con inteligencia artificial. "
+            "🤖 Hola, soy Paloma, la asistente virtual de AUTENEX AUTOMATIONS IA.\n"
+            "Ayudo a empresas como la tuya a automatizar tareas repetitivas con inteligencia artificial.\n"
             "¿Te interesa saber más sobre nuestros Asistentes de Voz, Automatizaciones, CRM, Chatbots o Asesoramiento?"
         )
 
@@ -92,11 +98,12 @@ def webhook():
         "chat_id": chat_id,
         "text": response
     }
-    requests.post(url, json=payload)
+
+    res = requests.post(url, json=payload)
+    print("📤 Respuesta de Telegram:", res.status_code, res.text)
 
     return "OK"
 
 if __name__ == "__main__":
-    # Render generalmente usa el puerto definido en la variable de entorno PORT
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
